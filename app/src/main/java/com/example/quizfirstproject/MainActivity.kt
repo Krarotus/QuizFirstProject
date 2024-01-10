@@ -74,11 +74,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         cheatButton.setOnClickListener {
-            // Начало CheatActivit
             val answerIsTrue = quizViewModel.currentQuestionAnswer
-            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
+            val currentIndex = quizViewModel.currentIndex
+            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue, currentIndex)
             startActivityForResult(intent, REQUEST_CODE_CHEAT)
         }
+
 
         updateQuestion()
     }

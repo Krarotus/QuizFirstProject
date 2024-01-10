@@ -17,7 +17,8 @@ ls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        tools:text="Answer"/>
+        tools:text="Answer" />
+
     <Button
         android:id="@+id/show_answer_button"
         android:layout_width="wrap_content"

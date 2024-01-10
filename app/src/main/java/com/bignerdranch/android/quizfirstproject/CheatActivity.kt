@@ -22,13 +22,17 @@ class CheatActivity : AppCompatActivity() {
     private lateinit var showAnswerButton: Button
     private lateinit var versionAndroid: TextView
     private var answerIsTrue = false
+    private var currentIndex = 1
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cheat)
         answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
+        currentIndex = intent.getIntExtra(EXTRA_CURRENT_INDEX, 0)
+        currentIndex = currentIndex + 1
         answerTextView = findViewById(R.id.answer_text_view)
+        answerTextView.text = currentIndex.toString()
         showAnswerButton = findViewById(R.id.show_answer_button)
         versionAndroid = findViewById(R.id.version_android)
         versionAndroid.setText("Android API "+ Build.VERSION.SDK_INT.toString())
@@ -43,12 +47,16 @@ class CheatActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun newIntent(packageContext: Context, answerIsTrue: Boolean): Intent {
+        private const val EXTRA_CURRENT_INDEX = "com.bignerdranch.android.geoquiz.current_index"
+
+        fun newIntent(packageContext: Context, answerIsTrue: Boolean, currentIndex: Int): Intent {
             return Intent(packageContext, CheatActivity::class.java).apply {
                 putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue)
+                putExtra(EXTRA_CURRENT_INDEX, currentIndex)
             }
         }
     }
+
 
     private fun
             setAnswerShownResult(isAnswerShown: Boolean) {
